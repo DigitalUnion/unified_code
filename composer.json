@@ -1,0 +1,25 @@
+{
+    "name": "Shum/Shum-unified-code",
+    "authors": [
+        {
+            "name": "shuM",
+            "email": "715417367@qq.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ShuM\\Unifiedcode\\": "src/ShuM/Unifiedcode/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ShuM\\Unifiedcode\\UnifiedcodeServiceProvider"
+            ],
+            "aliases": {
+                "Unifiedcode": "ShuM\\Unifiedcode\\Facades\\Unifiedcode"
+            }
+        }
+    }
+}
