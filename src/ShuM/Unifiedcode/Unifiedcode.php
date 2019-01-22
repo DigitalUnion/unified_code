@@ -19,7 +19,7 @@ class Unifiedcode
      */
     public function __construct()
     {
-        require_once('ConfigCode.php');
+
     }
 
     /**
