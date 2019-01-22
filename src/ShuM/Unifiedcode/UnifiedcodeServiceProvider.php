@@ -30,7 +30,7 @@ class UnifiedcodeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('unifiedcode', function ($app) {
-            return new Unifiedcode();
+            return new Unifiedcode($app['config']);
         });
     }
 

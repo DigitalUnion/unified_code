@@ -2,12 +2,12 @@
 
 namespace ShuM\Unifiedcode;
 
+use Illuminate\Config\Repository;
+
 class Unifiedcode
 {
-    /**
-     * @var SessionManager
-     */
-    protected $session;
+
+    use CommonResponse;
 
     /**
      * @var Repository
@@ -17,9 +17,9 @@ class Unifiedcode
     /**
      * Packagetest constructor
      */
-    public function __construct()
+    public function __construct(Repository $config)
     {
-
+        $this->config = $config;
     }
 
     /**
@@ -29,9 +29,6 @@ class Unifiedcode
      */
     public function parsingCode($code = -1, $param = array())
     {
-        require_once('ConfigCode.php');
-        $msg = isset($common[$code]) ? $common[$code] : '未定义异常';
-        $msg = $param ? str_replace(array_keys($param), array_values($param), $msg) : $msg;
-        return $msg;
+
     }
 }
