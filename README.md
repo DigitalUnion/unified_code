@@ -3,7 +3,7 @@
 ### Installation
 
 ```shell
-$ composer require "shu-m/shu-m-unified-code" -vvv
+$ composer require "shum/shum-unified-code" -vvv
 ```
 
 ### 注册
