@@ -13,13 +13,13 @@ trait CommonResponse
 {
     /**
      * @desc 请求需要返回成功信息时
-     * @param int $code 成功返回的状态码
      * @param array $data 成功是附带的数据列表
+     * @param int $code 成功返回的状态码
      * @param array $ext_data 需要附加带过去的额外的数据列表
      * @param array $params 语言文件需要的参数
      * @return \Illuminate\Http\JsonResponse
      */
-    public function onSuccess(int $code, $data = [], array $ext_data = [], array $params = [])
+    public function onSuccess($data = [], int $code = 0, array $ext_data = [], array $params = [])
     {
         $message = $this->getResponseMessageByCode($code, $params);
         $response_data = [
@@ -77,7 +77,7 @@ trait CommonResponse
     public function getResponseMessageByCode($code, array $params)
     {
         require_once(__DIR__ . '/config/ConfigCode.php');
-        $msg = isset($common[$code]) ? $common[$code] : '未定义异常';
+        $msg = isset($common[$code]) ? $common[$code] : trans($this->config->get('app.name') . '.' . $code);
         $msg = $params ? str_replace(array_keys($params), array_values($params), $msg) : $msg;
         return $msg;
     }
