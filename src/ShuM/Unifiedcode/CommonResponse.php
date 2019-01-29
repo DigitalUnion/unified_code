@@ -70,6 +70,16 @@ trait CommonResponse
     }
 
     /**
+     * @param int $code
+     * @param array $params
+     * @throws NonfatalException
+     */
+    {
+        $mess = $this->getResponseMessageByCode($code, $params);
+        throw new NonfatalException($code, $mess);
+    }
+
+    /**
      * @param int $code 通过给定的状态码获取语言包中的错误信息
      * @param array $params 语言文件需要的参数
      * @return mixed|string
