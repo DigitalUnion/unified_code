@@ -74,6 +74,7 @@ trait CommonResponse
      * @param array $params
      * @throws NonfatalException
      */
+    public function nonfatalException(int $code, $params = [])
     {
         $mess = $this->getResponseMessageByCode($code, $params);
         throw new NonfatalException($code, $mess);
