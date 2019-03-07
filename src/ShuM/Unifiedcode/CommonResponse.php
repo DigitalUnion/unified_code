@@ -88,8 +88,12 @@ trait CommonResponse
     public function getResponseMessageByCode($code, array $params)
     {
         require_once(__DIR__ . '/config/ConfigCode.php');
-        $msg = isset($common[$code]) ? $common[$code] : trans($this->config->get('app.name') . '.' . $code);
-        $msg = $params ? str_replace(array_keys($params), array_values($params), $msg) : $msg;
+        $msg = isset($common[$code]) ? $common[$code] : trans($this->config->get('app.name') . '.' . $code, $params);
+        $keys = array_keys($params);
+        foreach ($keys as $k => &$key) {
+            $key = ':' . $key;
+        }
+        $msg = $params ? str_replace($keys, array_values($params), $msg) : $msg;
         return $msg;
     }
 }
