@@ -96,4 +96,44 @@ trait CommonResponse
         $msg = $params ? str_replace($keys, array_values($params), $msg) : $msg;
         return $msg;
     }
+
+    /**
+     * @desc 请求需要返回成功信息时
+     * @param array $data 成功是附带的数据列表
+     * @param int $code 成功返回的状态码
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function onSuccessV2(array $data = [], int $code = 0)
+    {
+        $response_data = [
+            'code' => $code,
+            'message' => 'success',
+            'data' => $data,
+        ];
+        return response()->json($response_data);
+    }
+
+    /**
+     * @param int $code 返回的错误码
+     * @param string $msg 错误提示信息
+     * @param array $params 需要替换的错误提示信息中的参数
+     * @return mixed
+     */
+    public function onErrorV2(int $code, string $msg = '', array $params = [])
+    {
+        if ($msg) {
+
+            $msg = empty($params) ? $msg : str_replace(array_keys($params), array_values($params), $msg);
+        } else {
+
+            $msg = $this->config->get('app.name') . ':' . ($this->getResponseMessageByCode($code, []));
+        }
+
+        $response_data = [
+            'code' => $code,
+            'message' => $msg,
+        ];
+
+        return response()->json($response_data);
+    }
 }
