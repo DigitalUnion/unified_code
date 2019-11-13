@@ -103,7 +103,7 @@ trait CommonResponse
      * @param int $code 成功返回的状态码
      * @return \Illuminate\Http\JsonResponse
      */
-    public function onSuccessV2(array $data = [], int $code = 0)
+    public function onSuccessV2($data = [], int $code = 0)
     {
         $response_data = [
             'code' => $code,
@@ -126,7 +126,7 @@ trait CommonResponse
             $msg = empty($params) ? $msg : str_replace(array_keys($params), array_values($params), $msg);
         } else {
 
-            $msg = $this->config->get('app.name') . ':' . ($this->getResponseMessageByCode($code, []));
+            $msg = $this->config->get('app.name') . ':' . ($this->getResponseMessageByCode($code, $params));
         }
 
         $response_data = [
