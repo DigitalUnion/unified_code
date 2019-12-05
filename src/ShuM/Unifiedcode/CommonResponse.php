@@ -117,9 +117,10 @@ trait CommonResponse
      * @param int $code 返回的错误码
      * @param string $msg 错误提示信息
      * @param array $params 需要替换的错误提示信息中的参数
+     * @param int $silent 错误信息前端是否展示 0 展示  1 展示
      * @return mixed
      */
-    public function onErrorV2(int $code, string $msg = '', array $params = [])
+    public function onErrorV2(int $code, string $msg = '', array $params = [], int $silent = 0)
     {
         if ($msg) {
 
@@ -132,6 +133,7 @@ trait CommonResponse
         $response_data = [
             'code' => $code,
             'message' => $msg,
+            'silent' => $silent
         ];
 
         return response()->json($response_data);
