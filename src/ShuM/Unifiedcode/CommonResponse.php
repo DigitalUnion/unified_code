@@ -41,7 +41,7 @@ trait CommonResponse
      */
     public function onError(int $code, array $ext_data = [], array $params = [])
     {
-        $message = $this->config->get('app.name') . ':' . ($this->getResponseMessageByCode($code, $params));
+        $message = $this->getResponseMessageByCode($code, $params);
         $response_data = [
             'code' => $code,
             'message' => $message,
@@ -127,7 +127,7 @@ trait CommonResponse
             $msg = empty($params) ? $msg : str_replace(array_keys($params), array_values($params), $msg);
         } else {
 
-            $msg = $this->config->get('app.name') . ':' . ($this->getResponseMessageByCode($code, $params));
+            $msg = $this->getResponseMessageByCode($code, $params);
         }
 
         $response_data = [
