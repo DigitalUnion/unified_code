@@ -58,7 +58,7 @@ trait CommonResponse
      */
     public function nonfatalError(NonfatalException $e)
     {
-        $message = $this->config->get('app.name') . ':' . ($e->getMessage());
+        $message = $e->getMessage();
         $response_data = [
             'code' => $e->getCode(),
             'message' => $message,
@@ -88,7 +88,7 @@ trait CommonResponse
     public function getResponseMessageByCode($code, array $params)
     {
         require_once(__DIR__ . '/config/ConfigCode.php');
-        $msg = isset($common[$code]) ? $common[$code] : trans($code, $params);
+        $msg = isset($common[$code]) ? $common[$code] : trans($this->config->get('app.name') . '.' . $code, $params);
         $keys = array_keys($params);
         foreach ($keys as $k => &$key) {
             $key = ':' . $key;
